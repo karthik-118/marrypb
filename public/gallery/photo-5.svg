@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a9c8a"/>
+      <stop offset="100%" stop-color="#147d6f"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#bg4)"/>
+  <rect x="18" y="18" width="564" height="414" fill="none" stroke="#d4af37" stroke-width="2" opacity="0.55"/>
+  <g transform="translate(300 195)"><g fill="none" stroke="#e6c767" stroke-width="5"><circle cx="-16" cy="0" r="26"/><circle cx="16" cy="0" r="26"/></g></g>
+  <text x="300" y="300" text-anchor="middle" fill="#f3e4b3" font-family="Georgia, serif" font-size="22" font-style="italic">Add your photo</text>
+  <text x="300" y="330" text-anchor="middle" fill="#e6c767" font-family="Georgia, serif" font-size="13" opacity="0.8">/public/gallery/photo-5</text>
+</svg>
