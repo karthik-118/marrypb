@@ -1,5 +1,6 @@
 import "./globals.css";
 import { config, coupleNames } from "@/lib/config";
+import MusicPlayer from "@/components/MusicPlayer";
 
 const names = coupleNames();
 const siteUrl = config.siteUrl || "https://marrypb.vercel.app";
@@ -49,7 +50,10 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <MusicPlayer />
+      </body>
     </html>
   );
 }

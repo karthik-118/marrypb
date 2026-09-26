@@ -24,7 +24,8 @@ export default function Events() {
               </div>
               <h3 className="event-name">{ev.name}</h3>
               <p className="event-meta">
-                {ev.date} · {ev.time}
+                {ev.date}
+                {ev.time ? ` · ${ev.time}` : ""}
               </p>
               {ev.venue ? <p className="event-venue">{ev.venue}</p> : null}
               {ev.note ? <p className="event-note">{ev.note}</p> : null}

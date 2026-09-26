@@ -40,6 +40,16 @@ export default function Footer() {
         <p className="footer-credit">
           {couple.hashtag ? `${couple.hashtag} · ` : ""}Made with love
         </p>
+        <div className="footer-maker" aria-label="Designed by Karthik">
+          <svg className="maker-mark" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" strokeWidth="1.4" />
+            <circle cx="24" cy="24" r="17.5" fill="none" stroke="currentColor" strokeWidth="0.7" opacity="0.55" />
+            <circle cx="24" cy="3.6" r="1.1" fill="currentColor" />
+            <circle cx="24" cy="44.4" r="1.1" fill="currentColor" />
+            <text x="24" y="31.5" textAnchor="middle" fill="currentColor">K</text>
+          </svg>
+          <a href="tel:+919113958078" className="footer-maker-num">+91 91139 58078</a>
+        </div>
       </div>
     </footer>
   );
