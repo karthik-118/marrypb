@@ -2,14 +2,28 @@ import "./globals.css";
 import { config, coupleNames } from "@/lib/config";
 
 const names = coupleNames();
+const siteUrl = config.siteUrl || "https://marrypb.vercel.app";
 
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: `${names} · Wedding`,
-  description: `Join us in celebrating the wedding of ${names} on ${config.wedding.dateDisplay} in ${config.wedding.cityDisplay}.`,
+  description: `Join us in celebrating the wedding of ${names} on ${config.wedding.dateDisplay} at ${config.location.venueName}, ${config.wedding.cityDisplay}.`,
   openGraph: {
-    title: `${names} · Wedding`,
-    description: `Celebrate the union of ${names} — ${config.wedding.dateDisplay}.`,
+    title: `${names} · Wedding Invitation`,
+    description: `With joy, we invite you to celebrate the wedding of ${names} — ${config.wedding.dateDisplay}, ${config.wedding.cityDisplay}.`,
+    url: siteUrl,
+    siteName: `${names} · Wedding`,
     type: "website",
+    locale: "en_IN",
+    images: [
+      { url: "/og.jpg", width: 1200, height: 630, alt: `${names} — Wedding Invitation` },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${names} · Wedding Invitation`,
+    description: `Join us to celebrate the wedding of ${names} — ${config.wedding.dateDisplay}.`,
+    images: ["/og.jpg"],
   },
 };
 
