@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// Small floating music toggle (bottom-left). Tries to start on the first
-// interaction (browsers block silent autoplay), and the icon spins while playing.
+// Floating music toggle (bottom-left). Browsers block audio before the first
+// user interaction, so we attempt autoplay on load and otherwise start on the
+// very first gesture — a tap, scroll, or key press (whichever comes first).
 export default function MusicPlayer({ src = "/music.mp3" }) {
   const audioRef = useRef(null);
   const userPaused = useRef(false);
@@ -13,23 +14,33 @@ export default function MusicPlayer({ src = "/music.mp3" }) {
     const a = audioRef.current;
     if (!a) return;
     a.volume = 0.55;
-    a.play().then(() => setPlaying(true)).catch(() => {});
 
+    const events = ["pointerdown", "touchstart", "keydown", "scroll"];
+    let cleaned = false;
+    const cleanup = () => {
+      if (cleaned) return;
+      cleaned = true;
+      events.forEach((ev) => window.removeEventListener(ev, starter));
+    };
     const starter = (e) => {
-      if (e.target.closest && e.target.closest(".music-toggle")) return;
+      // let the toggle button manage itself
+      if (e && e.target && e.target.closest && e.target.closest(".music-toggle")) return;
       if (userPaused.current) {
-        document.removeEventListener("pointerdown", starter);
+        cleanup();
         return;
       }
       a.play()
         .then(() => {
           setPlaying(true);
-          document.removeEventListener("pointerdown", starter);
+          cleanup();
         })
         .catch(() => {});
     };
-    document.addEventListener("pointerdown", starter);
-    return () => document.removeEventListener("pointerdown", starter);
+
+    // Try immediate autoplay (only succeeds if the browser already allows it).
+    a.play().then(() => setPlaying(true)).catch(() => {});
+    events.forEach((ev) => window.addEventListener(ev, starter, { passive: true }));
+    return cleanup;
   }, []);
 
   const toggle = () => {
@@ -47,7 +58,7 @@ export default function MusicPlayer({ src = "/music.mp3" }) {
 
   return (
     <>
-      <audio ref={audioRef} src={src} loop preload="none" />
+      <audio ref={audioRef} src={src} loop preload="auto" />
       <button
         className={"music-toggle" + (playing ? " playing" : "")}
         onClick={toggle}
